@@ -15,9 +15,7 @@
         <ul class="header-list">
           <li class="header-list__item"><p>г.Екатеринбург</p></li>
           <li class="header-list__item"><a href="catalog.html">Каталог</a></li>
-          <li class="header-list__item"><a href="#">Корзина</a></li>
-          <li class="header-list__item"><a href="account.html">Иван Иванов</a></li>
-          <li class="header-list__item"><a href="index.html">Выйти</a></li>
+          <li class="header-list__item"><a href="index.html">Войти</a></li>
         </ul>
       </nav>
     </div>
@@ -27,9 +25,10 @@
       <section class="account-info">
         <div class="account-info__list">
           <div class="account_info__item">
-            <img src="/img/avatar.png" alt="Аватар" class="account-avatar">
-            <a href="#">загрузить фото</a>
-          </div>
+            <img src="/img/avatar.png" alt="Аватар" class="account-avatar" id="avatar">
+            <input type="file" id="fileUpload" style="display: none;" />
+            <a href="#" id="uploadLink">загрузить фото</a>
+        </div>  
           <div class="account_info__item">
             <h2 class="section-account__name">Личные данные</h2>
             <div class="account-data">
@@ -70,7 +69,6 @@
                     </select>
                 </div>
             </div>
-            
             </div>
           </div>
         </div>
@@ -127,7 +125,7 @@
               </button>
             </li>
           </ul>
-          <a href="#" class="orders-scroll"><img src="/img/right.svg" alt=""></a>
+          <a href="#" class="slide-history"><img src="/img/right.svg" alt=""></a>
         </div> 
       </section>
 
@@ -165,5 +163,9 @@
       </ul>
     </div>
   </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/token.js"></script> 
+  <script src="/js/accountInfo.js"></script> 
 </body>
 </html>

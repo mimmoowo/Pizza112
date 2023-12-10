@@ -1,22 +1,3 @@
-// Открытие окна создания аккаунта 
-var spanCreate = document.getElementsByClassName("closeCreate")[0];
-var modalCreate = document.getElementById("createAccount-modal");
-var btnCreate = document.getElementById("openCreateAccount");
-
-btnCreate.onclick = function() {
-  modalCreate.style.display = "block";
-}
-
-spanCreate.onclick = function() {
-  modalCreate.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modalCreate) {
-    modalCreate.style.display = "none";
-  }
-}
-
 //Открытие окна входа в аккаунт
 var spanEntrance = document.getElementsByClassName("closeEntrance")[0];
 var modalEntrance = document.getElementById("entranceAccount-modal")
@@ -82,14 +63,11 @@ btnConfirm.onclick = function() {
     .then(data => {
       // Обработайте ответ сервера
       if (data['jwt-token']) {
-        // Если сервер вернул JWT-токен, сохраните его
         localStorage.setItem('jwt-token', data['jwt-token']);
-        // Если код подтверждения успешно отправлен, откройте модальное окно подтверждения
         phoneSpan.textContent = phoneValue;
         modalEntrance.style.display = "none";
         modalConfirm.style.display = "block";
       } else if (data.message) {
-        // Если сервер вернул сообщение об ошибке, покажите его
         alert('Ошибка: ' + data.message);
       }
     })
@@ -118,44 +96,43 @@ window.onclick = function(event) {
 //Нажатие кнопки изменить введеннный номер. Вход в аккаунт
 var changeButton = document.querySelector(".confirm-container__info a");
 
-changeButton.onclick = function() {
-  var phoneValue = phoneInput.value;
-     
-  if(phoneValue && phoneValue.match(/^\+7\d{10}$/)) {
-    var phoneNumber = phoneValue.replace('+', '');
-    
-    fetch('http://193.124.184.44:8080/api/auth/sms_authentications', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ phoneNumber: phoneNumber }) 
-    })
-    .then(response => {
+changeButton.onclick = async function() {
+  const phoneValue = phoneInput.value;
+
+  if (/^\+7\d{10}$/.test(phoneValue)) {
+    try {
+      const phoneNumber = phoneValue.replace('+', '');
+
+      const response = await fetch('http://193.124.184.44:8080/api/auth/sms_authentications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ phoneNumber: phoneNumber })
+      });
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json();
-    })
-    .then(data => {
+
+      const data = await response.json();
+
       if (data.message === 'Message send') {
         alert('Сообщение отправлено');
       } else {
         alert('Ошибка: ' + data.message);
       }
-    })
-    .catch(error => {
+    } catch (error) {
       if (error.message === 'Network response was not ok') {
         alert('Слишком много запросов, пожалуйста, подождите минуту');
       } else {
         console.error('There has been a problem with your fetch operation:', error);
       }
-    });
+    }
   } else {
-    //Небходимо придумать визуализацию
-    alert("Ошибка, введите правильный номер");
+    alert('Ошибка, введите правильный номер');
   }
-}
+};
 
 //Копирование введеного номера с проверкой на верность ввода
 var phoneInput = document.getElementById("phoneInput");
@@ -193,5 +170,4 @@ inputs.forEach(function(input, index) {
     }
   });
 });
-
 
