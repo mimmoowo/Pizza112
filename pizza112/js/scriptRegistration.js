@@ -166,12 +166,12 @@ function checkSMSCode(code) {
     },
     body: JSON.stringify(data),
   })
-  
+
   .then((response) => response.json())
   .then((data) => {
-    if (data.jwt_token) {
+    if (data.jwt-token) {
       alert('Код успешно проверен');
-      setUserToken(data.jwt_token); 
+      setUserToken(data.jwt-token); 
       modalConfirm.style.display = "none"; 
       window.location.reload();
     } else if (data.message === 'Неверный код или логин') {
