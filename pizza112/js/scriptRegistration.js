@@ -35,55 +35,50 @@ phoneInput.addEventListener('input', function(event) {
 });
 
 //Открытие окна подтверждения аккаунта
-var spanConfirm = document.getElementsByClassName("closeConfirm")[0];
-var modalConfirm = document.getElementById("confirmAccount-modal");
+var phoneInput = document.getElementById('phoneInput');
 var btnConfirm = document.getElementById("openConfirmAccount");
+var modalConfirm = document.getElementById("confirmAccount-modal");
+var modalEntrance = document.getElementById("entranceAccount-modal");
+var spanConfirm = document.getElementsByClassName("closeConfirm")[0];
+var phoneNumberDisplay = document.querySelector(".confirm-container__info span");
+var changeButton = document.querySelector(".confirm-container__info a");
+var resendButton = document.querySelector(".confirm-telephone_btn");
 
-var phoneInput = document.getElementById("phoneInput");
-var phoneSpan = document.querySelector(".confirm-container__info span");
+phoneInput.addEventListener('input', function(event) {
+  var currentValue = event.target.value;
+  var cleanedValue = currentValue.replace(/\D/g, '');
 
-btnConfirm.onclick = function() {
-  var phoneValue = phoneInput.value;
-     
-  if(phoneValue && phoneValue.match(/^\+7\d{10}$/)) {
-    // Отправьте запрос на сервер с номером телефона
-    fetch('https://pizza112.srvsrv.net/api/auth/sms_check', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ phoneNumber: phoneValue, password: '111111' }) // добавьте пароль в тело запроса
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Обработайте ответ сервера
-      if (data['jwt-token']) {
-        localStorage.setItem('jwt-token', data['jwt-token']);
-        phoneSpan.textContent = phoneValue;
-        modalEntrance.style.display = "none";
-        modalConfirm.style.display = "block";
-      } else if (data.message) {
-        alert('Ошибка: ' + data.message);
-      }
-    })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
-    });
+  if (cleanedValue.startsWith('7')) {
+    cleanedValue = '+7' + cleanedValue.slice(1);
   } else {
-    //Небходимо придумать визуализацию
-    alert("Ошибка, введите правильный номер");
+    cleanedValue = '+7' + cleanedValue;
   }
-}
 
+  cleanedValue = cleanedValue.slice(0, 12);
+  event.target.value = cleanedValue;
+}); 
+
+btnConfirm.addEventListener('click', function() {
+  var phoneNumber = phoneInput.value.replace('+', '');
+  sendSMSCode(phoneNumber);
+  phoneNumberDisplay.textContent = phoneNumber;
+  modalEntrance.style.display = "none";
+  modalConfirm.style.display = "block";
+});
+
+resendButton.addEventListener('click', function() {
+  var phoneNumber = phoneInput.value.replace('+', '');
+  resendSMSCode(phoneNumber);
+});
 
 spanConfirm.onclick = function() {
   modalConfirm.style.display = "none";
 }
+
+changeButton.addEventListener('click', function() {
+  modalConfirm.style.display = "none";
+  modalEntrance.style.display = "block";
+});
 
 window.onclick = function(event) {
   if (event.target == modalConfirm) {
@@ -93,64 +88,47 @@ window.onclick = function(event) {
   }
 }
 
-//Нажатие кнопки изменить введеннный номер. Вход в аккаунт
-var changeButton = document.querySelector(".entrance-telephone_btn");
+function sendSMSCode(phoneNumber) {
+  var url = 'https://pizza112.srvsrv.net/api/auth/sms_authentications';
+  var data = { phone_number: phoneNumber };
 
-changeButton.onclick = async function() {
-  const phoneValue = phoneInput.value;
-
-  if (/^\+7\d{10}$/.test(phoneValue)) {
-    try {
-      const phoneNumber = phoneValue.replace('+', '');
-
-      const response = await fetch('https://pizza112.srvsrv.net/api/auth/sms_authentications', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ phoneNumber: phoneNumber })
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-
-      if (data.message === 'Message send') {
-        alert('Сообщение отправлено');
-      } else {
-        alert('Ошибка: ' + data.message);
-      }
-    } catch (error) {
-      if (error.message === 'Network response was not ok') {
-        alert('Слишком много запросов, пожалуйста, подождите минуту');
-      } else {
-        console.error('There has been a problem with your fetch operation:', error);
-      }
-    }
-  } else {
-    alert('Ошибка, введите правильный номер');
-  }
-};
-
-//Копирование введеного номера с проверкой на верность ввода
-var phoneInput = document.getElementById("phoneInput");
-var phoneSpan = document.querySelector(".confirm-container__info span");
-
-btnConfirm.onclick = function() {
-  var phoneValue = phoneInput.value;
-     
-  if(phoneValue && phoneValue.match(/^\+7\d{10}$/)) {
-    phoneSpan.textContent = phoneValue;
-    modalEntrance.style.display = "none";
-    modalConfirm.style.display = "block";
-  } else {
-    //Небходимо придумать визуализацию
-    alert("Ошибка, введите правильный номер");
-  }
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+    alert('Сообщение отправлено');
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
 
+function resendSMSCode(phoneNumber) {
+  var url = 'https://pizza112.srvsrv.net/api/auth/sms_check/resend';
+  var data = { phone_number: phoneNumber };
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+    alert('Код успешно отправлен повторно');
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
 
 //Ввод кода и ограничение. Вход в аккаунт
 var inputs = document.querySelectorAll(".code-input input");
@@ -170,4 +148,3 @@ inputs.forEach(function(input, index) {
     }
   });
 });
-
