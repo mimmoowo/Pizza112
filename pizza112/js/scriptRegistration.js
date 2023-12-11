@@ -131,20 +131,89 @@ function resendSMSCode(phoneNumber) {
 }
 
 //Ввод кода и ограничение. Вход в аккаунт
-var inputs = document.querySelectorAll(".code-input input");
 
-inputs.forEach(function(input, index) {
-  input.addEventListener("input", function() {
-    this.value = this.value.replace(/[^0-9]/g, "");
+var codeInputElements = document.querySelectorAll(".code-input input");
+var incorrectAttempts = 0;
+
+codeInputElements.forEach(function(inputElement, index) {
+  inputElement.addEventListener('input', function() {
+    if (this.value.length > 0 && index < codeInputElements.length - 1) {
+      codeInputElements[index + 1].focus();
+    }
+
+    if (index === codeInputElements.length - 1 && this.value.length > 0) {
+      var code = Array.from(codeInputElements).map(input => input.value).join('');
+      checkSMSCode(code);
+    }
   });
 
-  input.addEventListener("keyup", function(e) {
-    if (this.value.length >= this.maxLength && index < inputs.length - 1) {
-      inputs[index + 1].focus();
-    }
-    
-    if (e.key === "Backspace" && this.value.length === 0 && index > 0) {
-      inputs[index - 1].focus();
+  inputElement.addEventListener('keydown', function(event) {
+    if (event.key === 'Backspace' && this.value.length === 0 && index > 0) {
+      codeInputElements[index - 1].focus();
     }
   });
 });
+
+function checkSMSCode(code) {
+  var url = 'https://pizza112.srvsrv.net/api/auth/sms_check';
+  var data = { password: code };
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.jwt_token) {
+      alert('Код успешно проверен');
+      setUserToken(data.jwt_token); 
+      modalConfirm.style.display = "none"; 
+      window.location.reload();
+    } else if (data.message === 'Неверный код или логин') {
+      incorrectAttempts++;
+      if (incorrectAttempts >= 3) {
+        var phoneNumber = phoneInput.value.replace('+', '');
+        resendSMSCode(phoneNumber);
+        alert('Вы исчерпали все возможные попытки, отправьте сообщение повторно');
+        incorrectAttempts = 0;
+      } else {
+        alert('Некорректно введен номер или код');
+      }
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+function setUserToken(token) {
+  localStorage.setItem('userToken', token);
+}
+
+function getUserToken() {
+  return localStorage.getItem('userToken');
+}
+
+window.onload = function() {
+  var token = getUserToken();
+  if (token) {
+    var ul = document.querySelector('.header-list');
+    
+    var liCart = document.createElement('li');
+    liCart.className = 'header-list__item';
+    liCart.innerHTML = '<a href="shop.html">Корзина</a>';
+    ul.appendChild(liCart);
+    
+    var liUser = document.createElement('li');
+    liUser.className = 'header-list__item';
+    liUser.innerHTML = '<a href="account.html">Иван Иванов</a>';
+    ul.appendChild(liUser);
+    
+    var loginLink = document.querySelector('.header-list__item a[href="index.html"]');
+    loginLink.textContent = 'Выйти';
+  }
+}
+
