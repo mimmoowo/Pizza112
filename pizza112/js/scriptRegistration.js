@@ -90,7 +90,7 @@ window.onclick = function(event) {
 
 function sendSMSCode(phoneNumber) {
   var url = 'https://pizza112.srvsrv.net/api/auth/sms_authentications';
-  var data = { phone_number: phoneNumber };
+  var data = { phoneNumber: phoneNumber };
 
   fetch(url, {
     method: 'POST',
@@ -111,7 +111,7 @@ function sendSMSCode(phoneNumber) {
 
 function resendSMSCode(phoneNumber) {
   var url = 'https://pizza112.srvsrv.net/api/auth/sms_check/resend';
-  var data = { phone_number: phoneNumber };
+  var data = { phoneNumber: phoneNumber };
 
   fetch(url, {
     method: 'POST',
