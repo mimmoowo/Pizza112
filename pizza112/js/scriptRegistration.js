@@ -156,7 +156,8 @@ codeInputElements.forEach(function(inputElement, index) {
 
 function checkSMSCode(code) {
   var url = 'https://pizza112.srvsrv.net/api/auth/sms_check';
-  var data = { password: code };
+  var phoneNumber = phoneInput.value.replace('+', '');
+  var data = { phoneNumber: phoneNumber, password: code };
 
   fetch(url, {
     method: 'POST',
@@ -165,6 +166,7 @@ function checkSMSCode(code) {
     },
     body: JSON.stringify(data),
   })
+  
   .then((response) => response.json())
   .then((data) => {
     if (data.jwt_token) {
