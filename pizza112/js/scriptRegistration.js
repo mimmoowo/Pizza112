@@ -47,7 +47,7 @@ btnConfirm.onclick = function() {
      
   if(phoneValue && phoneValue.match(/^\+7\d{10}$/)) {
     // Отправьте запрос на сервер с номером телефона
-    fetch('http://193.124.184.44:8080/api/auth/sms_check', {
+    fetch('https://pizza112.srvsrv.net/api/auth/sms_check', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ changeButton.onclick = async function() {
     try {
       const phoneNumber = phoneValue.replace('+', '');
 
-      const response = await fetch('http://193.124.184.44:8080/api/auth/sms_authentications', {
+      const response = await fetch('https://pizza112.srvsrv.net/api/auth/sms_authentications', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
