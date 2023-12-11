@@ -94,7 +94,7 @@ window.onclick = function(event) {
 }
 
 //Нажатие кнопки изменить введеннный номер. Вход в аккаунт
-var changeButton = document.querySelector(".confirm-container__info a");
+var changeButton = document.querySelector(".entrance-telephone_btn");
 
 changeButton.onclick = async function() {
   const phoneValue = phoneInput.value;

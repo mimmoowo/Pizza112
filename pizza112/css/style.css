@@ -22,7 +22,6 @@
 
 body {
   margin: 0;
-  zoom: 100%;
 }
 
 /**
@@ -360,6 +359,7 @@ body{
   padding: 0;
   font-family: 'Kreadon';
   background-color: #FFFDEE;
+  zoom: 100%;
 }
 
 ul{
