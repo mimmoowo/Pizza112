@@ -208,8 +208,14 @@ window.onload = function() {
     
     var liCart = document.createElement('li');
     liCart.className = 'header-list__item';
+    liCart.style.display = 'none'; 
     liCart.innerHTML = '<a href="shop.html">Корзина</a>';
     ul.insertBefore(liCart, liCatalog.nextSibling);
+    
+    var liUser = document.createElement('li');
+    liUser.className = 'header-list__item';
+    liUser.style.display = 'none'; 
+    ul.insertBefore(liUser, liCart.nextSibling);
     
     fetch('https://pizza112.srvsrv.net/api/client/getPP', {
       method: 'GET',
@@ -220,11 +226,9 @@ window.onload = function() {
     })
     .then((response) => response.json())
     .then((userData) => {
-      var liUser = document.createElement('li');
-      liUser.className = 'header-list__item';
       liUser.innerHTML = '<a href="account.html">' + userData.name + ' ' + userData.surname + '</a>';
-      
-      ul.insertBefore(liUser, liCart.nextSibling);
+      liCart.style.display = 'block'; 
+      liUser.style.display = 'block'; 
     });
     
     var loginLink = document.querySelector('#openEntranceAccount');
@@ -237,5 +241,6 @@ window.onload = function() {
     });
   }
 }
+
 
 

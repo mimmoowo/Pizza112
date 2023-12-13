@@ -1,9 +1,11 @@
 var closeChose = document.getElementsByClassName("closeChose-pizza")[0];
-var chosePizza= document.getElementById("chosePizza-modal");
-var btnChose = document.getElementById("chosePizza");
+var chosePizza = document.getElementById("chosePizza-modal");
+var btnsChose = document.getElementsByClassName("catalog-pizza__chose");
 
-btnChose.onclick = function() {
-  chosePizza.style.display = "block";
+for (var i = 0; i < btnsChose.length; i++) {
+  btnsChose[i].onclick = function() {
+    chosePizza.style.display = "block";
+  }
 }
 
 closeChose.onclick = function() {
@@ -17,11 +19,13 @@ window.onclick = function(event) {
 }
 
 var closeChoseDrinks = document.getElementsByClassName("closeChose-drinks")[0];
-var choseDrinks= document.getElementById("choseDrinks-modal");
-var btnChoseDrinks = document.getElementById("choseDrinks");
+var choseDrinks = document.getElementById("choseDrinks-modal");
+var btnsChoseDrinks = document.getElementsByClassName("catalog-drinks__chose");
 
-btnChoseDrinks.onclick = function() {
-  choseDrinks.style.display = "block";
+for (var i = 0; i < btnsChoseDrinks.length; i++) {
+  btnsChoseDrinks[i].onclick = function() {
+    choseDrinks.style.display = "block";
+  }
 }
 
 closeChoseDrinks.onclick = function() {
