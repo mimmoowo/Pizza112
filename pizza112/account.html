@@ -11,11 +11,11 @@
   <header>
     <div class="container">
       <nav class="header-nav">
-        <a href="#" class="header-logo"><img src="/img/logo.svg" alt="Логотип"></a>
+        <a href="index.html" class="header-logo"><img src="/img/logo.svg" alt="Логотип"></a>
         <ul class="header-list">
           <li class="header-list__item"><p>г.Екатеринбург</p></li>
           <li class="header-list__item"><a href="catalog.html">Каталог</a></li>
-          <li class="header-list__item"><a href="index.html">Войти</a></li>
+          <li class="header-list__item"><a href="index.html" id="openEntranceAccount">Войти</a></li>
         </ul>
       </nav>
     </div>
@@ -55,16 +55,28 @@
               <div class="account-data__item">
                 <p>Дата рождения</p>
                 <div class="account-data__form-container">
-                    <select class="account-data__form">
+                    <select class="account-data__form day">
                         <option value="">День</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                        <option value="01">1</option>
+                        <option value="02">2</option>
+                        <option value="03">3</option>
+                        <option value="04">4</option>
+                        <option value="05">5</option>
+                        <option value="06">6</option>
+                        <option value="07">7</option>
+                        <option value="08">8</option>
+                        <option value="09">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
                         <option value="31">31</option>
                     </select>
-                    <select class="account-data__form">
+                    <select class="account-data__form mounth">
                         <option value="">Месяц</option>
-                        <option value="1">Январь</option>
-                        <option value="2">Февраль</option>
+                        <option value="01">Январь</option>
+                        <option value="02">Февраль</option>
                         <option value="12">Декабрь</option>
                     </select>
                 </div>
@@ -164,7 +176,7 @@
     </div>
   </footer>
   
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/js/accountInfo.js"></script> 
+  <script src="/js/hota.js"></script> 
 </body>
 </html>

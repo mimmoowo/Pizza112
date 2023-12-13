@@ -1,78 +1,97 @@
-//Информация в текстовых полях и обновление
-async function getClientData(token) {
-  const config = {
-      headers: { Authorization: `Bearer ${token}` }
-  };
-
-  try {
-      const response = await axios.get('/api/client/getPP', config);
-      return response.data;
-  } catch (error) {
-      console.error(`Error: ${error.response.status}`);
-      console.error(`Message: ${error.response.data.message}`);
-  }
+function fillFormWithData(data) {
+  document.querySelector('.account-data__item:nth-child(1) .account-data__form').value = data.surname;
+  document.querySelector('.account-data__item:nth-child(2) .account-data__form').value = data.email || '';
+  document.querySelector('.account-data__item:nth-child(3) .account-data__form').value = data.name;
+  document.querySelector('.account-data__item:nth-child(4) .account-data__form').value = data.phoneNumber;
+  document.querySelector('.account-data__form.day').value = data.dateOfBirth.split('-')[2];
+  document.querySelector('.account-data__form.mounth').value = data.dateOfBirth.split('-')[1];
 }
 
-async function updateClientData(token, data) {
-  const config = {
-      headers: { Authorization: `Bearer ${token}` }
-  };
-
-  try {
-      const response = await axios.post('/api/client/updatePP', data, config);
-      return response.data;
-  } catch (error) {
-      console.error(`Error: ${error.response.status}`);
-      console.error(`Message: ${error.response.data.message}`);
-  }
-}
-
-getClientData('your-jwt-token')
-  .then(data => {
-      document.querySelector('.account-avatar').src = `/img/${data.photoName}`;
-      document.querySelector('.account-data__form[name="Фамилия"]').value = data.surname;
-      document.querySelector('.account-data__form[name="Почта"]').value = data.email;
-      document.querySelector('.account-data__form[name="Имя"]').value = data.name;
-      document.querySelector('.account-data__form[name="Номер телефона"]').value = data.phoneNumber;
-      document.querySelector('.account-data__form[name="Дата рождения"]').value = data.dateOfBirth;
-
-      document.querySelector('.account-data__rename').addEventListener('click', function() {
-          const updatedData = {
-              "Фамилия": document.querySelector('.account-data__form[name="Фамилия"]').value,
-              "Почта": document.querySelector('.account-data__form[name="Почта"]').value,
-              "Имя": document.querySelector('.account-data__form[name="Имя"]').value,
-              "Номер телефона": document.querySelector('.account-data__form[name="Номер телефона"]').value,
-              "Дата рождения": document.querySelector('.account-data__form[name="Дата рождения"]').value
-          };
-
-          updateClientData('your-jwt-token', updatedData);
-      });
+function getAccountData() {
+  var url = 'https://pizza112.srvsrv.net/api/client/getPP';
+  
+  fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+    },
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    fillFormWithData(data); 
+  })
+  .catch((error) => {
+    console.error('Error:', error);
   });
+}
 
-//Аватар 
-document.getElementById('uploadLink').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.getElementById('fileUpload').click();
-});
+document.addEventListener('DOMContentLoaded', getAccountData);
 
-document.getElementById('fileUpload').addEventListener('change', function() {
-  const file = this.files[0];
-  if (file && file.type.match('image.*')) {
-      const formData = new FormData();
-      formData.append('file', file);
 
-      axios.post('/api/client/updatePPAvatar', formData, {
-          headers: { 
-              Authorization: `Bearer your-jwt-token`,
-              'Content-Type': 'multipart/form-data'
-          }
-      })
-      .then(response => {
-          document.getElementById('avatar').src = URL.createObjectURL(file);
-      })
-      .catch(error => {
-          console.error(`Error: ${error.response.status}`);
-          console.error(`Message: ${error.response.data.message}`);
+function updateAccountData() {
+  var url = 'https://pizza112.srvsrv.net/api/client/updatePP';
+  
+  var data = {
+    surname: document.querySelector('.account-data__item:nth-child(1) .account-data__form').value,
+    email: document.querySelector('.account-data__item:nth-child(2) .account-data__form').value,
+    name: document.querySelector('.account-data__item:nth-child(3) .account-data__form').value,
+    phoneNumber: document.querySelector('.account-data__item:nth-child(4) .account-data__form').value,
+    dateOfBirth: '1971-' + 
+                 document.querySelector('.account-data__form.mounth').value + '-' + 
+                 document.querySelector('.account-data__form.day').value
+  };
+  
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+    },
+    body: JSON.stringify(data)
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    if (data.newToken) {
+      localStorage.setItem('userToken', data.newToken);
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+document.querySelector('.account-data__form').addEventListener('change', updateAccountData);
+
+var renameLinks = document.querySelectorAll('.account-data__rename');
+
+for (var i = 0; i < renameLinks.length; i++) {
+  var inputField = renameLinks[i].previousElementSibling;
+  
+  inputField.disabled = true;
+  
+  renameLinks[i].addEventListener('click', (function(inputField) {
+    return function(event) {
+      event.preventDefault();
+      
+      inputField.disabled = false;
+      
+      inputField.addEventListener('blur', function() {
+        updateAccountData();
+        
+        inputField.disabled = true;
       });
-  }
-});
+    };
+  })(inputField));
+}
+
+
+var dateSelects = document.querySelectorAll('.account-data__form.day, .account-data__form.mounth');
+
+for (var i = 0; i < dateSelects.length; i++) {
+  dateSelects[i].addEventListener('change', function(event) {
+    updateAccountData();
+  });
+}

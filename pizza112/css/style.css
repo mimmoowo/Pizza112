@@ -901,6 +901,8 @@ footer .container{
   margin-bottom: 26px;
   width: 425px;
   height: 425px;
+  border-radius: 50%;
+  border: 2px solid black;
 }
 
 .account_info__item a{
@@ -935,7 +937,7 @@ footer .container{
 .account-data__form{
   border-radius: 20px;
   width: 518px;
-  background-color: #898881;
+  background-color: #FFFDEE;
   font-size: 44px;
   line-height: 57px;
   font-weight: 330;
@@ -1110,7 +1112,7 @@ footer .container{
 .feedback-form{
   width: 1390px;
   height: 278px;
-  background: #898881;
+  background: #FFFDEE;
   margin-bottom: 18px;
   font-size: 40px;
   line-height: 52px;

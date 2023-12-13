@@ -11,11 +11,11 @@
   <header>
     <div class="container">
       <nav class="header-nav">
-        <a href="#" class="header-logo"><img src="/img/logo.svg" alt="Логотип"></a>
+        <a href="index.html"" class="header-logo"><img src="/img/logo.svg" alt="Логотип"></a>
         <ul class="header-list">
           <li class="header-list__item"><p>г.Екатеринбург</p></li>
-          <li class="header-list__item"><a href="shop.html">Каталог</a></li>
-          <li class="header-list__item"><a href="index.html">Войти</a></li>
+          <li class="header-list__item"><a href="catalog.html">Каталог</a></li>
+          <li class="header-list__item"><a href="#" id="openEntranceAccount">Войти</a></li>
         </ul>
       </nav>
     </div>
@@ -46,7 +46,7 @@
             <p class="catalog-pizza__info">ветчина, маринованные огурчики, томаты, красный лук, чеснок, соус барбекю, моцарелла, фирменный томатный соус</p>
             <div class="catalog-pizza__bottom">
               <p class="catalog-pizza__price">от 499 ₽</p>
-              <a href="#" class="catalog-pizza__chose" >выбрать</a>
+              <a href="#" class="catalog-pizza__chose" id="chosePizza">выбрать</a>
           </div>
           </li>
           <li class="catalog-pizza__item">
@@ -181,7 +181,43 @@
       <a href="" class="choseDrinks-content__end"><p>добавить в корзину за <span>250 ₽</span></p></a>
     </div>
   </div>
+
+  <div id="entranceAccount-modal" class="entranceAccount">
+    <div class="entranceAccount-content">
+      <span class="closeEntrance"><img src="/img/close.svg" alt="Закрытие"></span>
+        <h2 class="entrance-container__name">Войти в аккаунт</h2>
+        <p class="entrance-container__info">Запомним ваш адрес для доставки, поздравим в день рождения и сообщим о самых выгодных предложениях!</p>
+        <div class="entrance-telephone">
+          <p>Номер телефона</p>
+          <input type="tel" placeholder="+7" id="phoneInput">
+          <a href="#" class="entrance-telephone_btn" id="openConfirmAccount">выслать код подтверждения</a>
+        </div>
+        <p class="entrance-container__comment">Продолжая вы соглашаетесь <a href="#">со сбором и обработкой персональных данных и пользовательским соглашением</a></p>
+    </div>
+  </div> 
+
+  <div id="confirmAccount-modal" class="confirmAccount">
+    <div class="confirmAccount-content">
+      <span class="closeConfirm"><img src="/img/close.svg" alt="Закрытие"></span>
+        <h2 class="confirm-container__name">Войти в аккаунт</h2>
+        <p class="confirm-container__info">Отправили код подтвержения по номеру: <span>+79129883476 </span> <a href="#" >Изменить</a></p>
+        <div class="confirm-telephone">
+          <p>Код подтвеждения</p>
+          <div class="code-input">
+            <input type="text" maxlength="1"/>
+            <input type="text" maxlength="1"/>
+            <input type="text" maxlength="1"/>
+            <input type="text" maxlength="1"/>
+            <input type="text" maxlength="1"/>
+            <input type="text" maxlength="1"/>
+          </div>
+          <a href="#" class="confirm-telephone_btn">отправить код повторно</a>
+        </div>
+        <p class="confirm-container__comment">Продолжая вы соглашаетесь <a href="#">со сбором и обработкой персональных данных и пользовательским соглашением</a></p>
+    </div>
+  </div> 
+
   <script src="/js/chose.js"></script>
-  <script src="/js/token.js"></script> 
+  <script src="/js/scriptRegistration.js"></script>  
 </body>
 </html>
