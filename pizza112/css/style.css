@@ -956,9 +956,16 @@ footer .container{
 }
 
 .account-data__form-container{
+  width: 518px;
   display: flex;
   gap: 12px;
 }
+
+.account-data__form-container select{
+  box-sizing: border-box;
+}
+
+
 
 .account-data__form{
   font-size: 44px;

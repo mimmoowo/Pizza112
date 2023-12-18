@@ -1,3 +1,4 @@
+// Функция для заполнения формы данными
 function fillFormWithData(data) {
   document.querySelector('.account-data__item:nth-child(1) .account-data__form').value = data.surname;
   document.querySelector('.account-data__item:nth-child(2) .account-data__form').value = data.email || '';
@@ -5,6 +6,7 @@ function fillFormWithData(data) {
   document.querySelector('.account-data__item:nth-child(4) .account-data__form').value = data.phoneNumber;
   document.querySelector('.account-data__form.day').value = data.dateOfBirth.split('-')[2];
   document.querySelector('.account-data__form.mounth').value = data.dateOfBirth.split('-')[1];
+  document.getElementById('avatar').src = "https://pizza112.srvsrv.net/static/images/Avatars/" + data.imageName;
 }
 
 function getAccountData() {
@@ -29,7 +31,7 @@ function getAccountData() {
 
 document.addEventListener('DOMContentLoaded', getAccountData);
 
-
+// Функция для обновления данных аккаунта
 function updateAccountData() {
   var url = 'https://pizza112.srvsrv.net/api/client/updatePP';
   
@@ -87,7 +89,6 @@ for (var i = 0; i < renameLinks.length; i++) {
   })(inputField));
 }
 
-
 var dateSelects = document.querySelectorAll('.account-data__form.day, .account-data__form.mounth');
 
 for (var i = 0; i < dateSelects.length; i++) {
@@ -95,3 +96,38 @@ for (var i = 0; i < dateSelects.length; i++) {
     updateAccountData();
   });
 }
+
+// Функция для загрузки аватара
+document.getElementById('uploadLink').addEventListener('click', function() {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/png, image/jpeg, image/webp';
+  input.onchange = function(event) {
+      var file = event.target.files[0];
+      if(file.size > 200 * 1024) {
+          alert('Размер файла не должен превышать 200KB');
+          return;
+      }
+      var formData = new FormData();
+      formData.append('file', file);
+      fetch('https://pizza112.srvsrv.net/api/client/updatePPAvatar', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+          },
+      }).then(function(response) {
+          if(response.ok) {
+              return response.json();
+          } else {
+              throw new Error('Ошибка при обновлении аватара');
+          }
+      }).then(function(data) {
+          document.getElementById('avatar').src = "https://pizza112.srvsrv.net/static/images/Avatars/" + data.imageName;
+      }).catch(function(error) {
+          console.error(error);
+      });
+  };
+  input.click();
+});
+
