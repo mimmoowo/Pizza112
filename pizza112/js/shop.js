@@ -9,7 +9,7 @@ let totalAmount = 0;
 const updateTotalCountAndAmount = (countChange, amountChange) => {
   try {
     totalCount += countChange;
-    totalAmount += countChange * amountChange;
+    totalAmount += amountChange; 
 
     if (resultCount && totalCount >= 0) {
       resultCount.innerHTML = `${totalCount} ${formatWord(
@@ -72,7 +72,7 @@ const deleteItem = async (productId, productVariant) => {
 };
 
 // Функция для добавления товара
-const addItem = async (productId, productVariant) => {
+const addItem = async (productId, productVariant, quantity) => {
   const url = `https://pizza112.srvsrv.net/api/bucket/add`;
   const options = {
     method: "POST",
@@ -82,7 +82,8 @@ const addItem = async (productId, productVariant) => {
     },
     body: JSON.stringify({
       productId,
-      productVariant,
+      quantity,
+      productVariant,  
     }),
   };
   const response = await fetch(url, options);
@@ -160,14 +161,13 @@ async function showBucket() {
       count++;
       counterBlock.innerHTML = count;
       updateTotalCountAndAmount(1, item.productVariantPrice);
-      await addItem(item.productId, item.productVariant);
+      await addItem(item.productId, item.productVariant, 1); 
     };
     minus.onclick = async (ev) => {
       ev.preventDefault();
       if (count === 1) {
         ev.target.disabled = true;
         updateTotalCountAndAmount(-1, item.productVariantPrice);
-        listItem.style.filter = "blur(5px)";
         await resetItem(item.productId, item.productVariant);
         listItem.remove();
         return;
@@ -180,13 +180,12 @@ async function showBucket() {
     deleteButton.onclick = async (ev) => {
       ev.preventDefault();
       updateTotalCountAndAmount(-count, item.productVariantPrice * count);
-      listItem.style.filter = "blur(5px)";
       await resetItem(item.productId, item.productVariant);
       listItem.remove();
     };
 
     totalCount += item.quantity;
-    totalAmount += item.productVariantPrice * item.quantity;
+    totalAmount += item.productVariantPrice;
   });
 
   if (resultCount && totalCount > 0) {

@@ -362,10 +362,7 @@ body {
   padding: 0;
   font-family: "Kreadon";
   background-color: #fffdee;
-  /* zoom: 100%; */
 
-  width: 100vw;
-  /* overflow-x: hidden; */
 }
 
 ul {
@@ -380,7 +377,7 @@ li {
 }
 
 .container {
-  width: 95%;
+  width: 1720px;
   margin: 0 auto;
 }
 
@@ -453,7 +450,6 @@ header {
 .news-list__item {
   position: relative;
   margin-right: 30px;
-  width: 20%;
 }
 .news-list__item a {
   width: 100%;
