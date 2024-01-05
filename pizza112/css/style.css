@@ -2,7 +2,7 @@
 
 /* Document
    ========================================================================== */
-
+body
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -21,8 +21,9 @@ html {
  */
 
 body {
-  margin: 0;
+  margin: 0; 
 }
+
 section {
   max-width: 100%;
 }
@@ -589,10 +590,15 @@ header {
 
 /*Верстка подвала*/
 
+footer {
+  position: relative;
+  bottom: 0;
+}
 footer .container {
   margin-top: 117px;
   border-top: 4px #141414 solid;
   padding-top: 21px;
+
 }
 
 .footer-list {
@@ -750,16 +756,18 @@ footer .container {
   display: none;
   position: fixed;
   z-index: 1;
-  left: 0;
-  top: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
+  padding: 10% 0;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .confirmAccount-content {
   background-color: #e5e4d6;
-  margin: 15% auto;
+  margin: 0 auto;
   padding: 20px;
   width: 756px;
   height: 638px;
@@ -1094,6 +1102,7 @@ footer .container {
   background: none;
 
   cursor: pointer;
+  text-decoration: none;  
 }
 
 /*Вертка личного кабинета(Оставить отзыв)*/

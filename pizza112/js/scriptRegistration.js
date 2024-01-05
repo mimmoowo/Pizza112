@@ -226,7 +226,7 @@ window.onload = function() {
     })
     .then((response) => response.json())
     .then((userData) => {
-      liUser.innerHTML = '<a href="account.html">' + userData.name + ' ' + userData.surname + '</a>';
+      liUser.innerHTML = '<a href="account.html">Личный кабинет</a>';
       liCart.style.display = 'block'; 
       liUser.style.display = 'block'; 
     });

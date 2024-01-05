@@ -9,7 +9,7 @@ let totalAmount = 0;
 const updateTotalCountAndAmount = (countChange, amountChange) => {
   try {
     totalCount += countChange;
-    totalAmount += amountChange; 
+    totalAmount += amountChange * countChange; 
 
     if (resultCount && totalCount >= 0) {
       resultCount.innerHTML = `${totalCount} ${formatWord(
@@ -31,65 +31,77 @@ const updateTotalCountAndAmount = (countChange, amountChange) => {
 };
 
 const resetItem = async (productId, productVariant) => {
-  const url = `https://pizza112.srvsrv.net/api/bucket/reset`;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify({
-      productId,
-      productVariant,
-    }),
-  };
-  const response = await fetch(url, options);
-  const data = await response.json();
-  if (data.error) {
-    alert(data.error);
+  try {
+    const url = `https://pizza112.srvsrv.net/api/bucket/reset`;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        productId,
+        productVariant,
+      }),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 
 // Функция для удаления одного товара
 const deleteItem = async (productId, productVariant) => {
-  const url = `https://pizza112.srvsrv.net/api/bucket/delete`;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify({
-      productId,
-      productVariant,
-    }),
-  };
-  const response = await fetch(url, options);
-  const data = await response.json();
-  if (data.error) {
-    alert(data.error);
+  try {
+    const url = `https://pizza112.srvsrv.net/api/bucket/delete`;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        productId,
+        productVariant,
+      }),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 
 // Функция для добавления товара
 const addItem = async (productId, productVariant, quantity) => {
-  const url = `https://pizza112.srvsrv.net/api/bucket/add`;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify({
-      productId,
-      quantity,
-      productVariant,  
-    }),
-  };
-  const response = await fetch(url, options);
-  const data = await response.json();
-  if (data.error) {
-    alert(data.error);
+  try {
+    const url = `https://pizza112.srvsrv.net/api/bucket/add`;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        productId,
+        quantity,
+        productVariant,  
+      }),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error(error)
   }
 };
 
@@ -113,8 +125,9 @@ async function showBucket() {
   const promoCodeItem = document.querySelector(".shop-list .shop-item");
 
   data.forEach((item) => {
-    // Расшифровываем значения info
-    const size =
+    try {
+      // Расшифровываем значения info
+      const size =
       item.productVariant[0] === "S"
         ? "25см"
         : item.productVariant[0] === "M"
@@ -185,7 +198,10 @@ async function showBucket() {
     };
 
     totalCount += item.quantity;
-    totalAmount += item.productVariantPrice;
+    totalAmount += item.productVariantPrice * item.quantity;
+    } catch (error) {
+      console.error(error)
+    }
   });
 
   if (resultCount && totalCount > 0) {
@@ -203,6 +219,30 @@ async function showBucket() {
       new Intl.NumberFormat("ru-RU").format(totalAmount) + " ₽";
   }
   
+  //Оплата товара 
+  const resultSubmit = document.querySelector('.result-submit');
+
+
+  resultSubmit.addEventListener('click', async (event) => {
+  event.preventDefault();
+
+  const url = 'https://pizza112.srvsrv.net/api/bucket/confirm';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+  };
+
+  const response = await fetch(url, options);
+
+  if (response.ok) {
+    alert('Заказ успешно оплачен!');
+  } else {
+    alert('Произошла ошибка при оплате заказа');
+  }
+});
 }
 
 const formatWord = (count, one, two, five) => {
