@@ -515,7 +515,22 @@ header {
   margin-right: 55px;
 }
 
+.star--empty {
+  display: none;
+}
+
+.reviews-display-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.reviews-list__item:first-child {
+  margin-right: 0;
+  flex: 1;
+}
+
 .reviews-list__item:last-child {
+  flex: 4;
   margin-right: 0;
 }
 
@@ -550,6 +565,10 @@ header {
 .star {
   padding-left: 5px;
   margin-bottom: 27px;
+}
+
+.star--empty {
+  display: none;
 }
 
 /*Верстка контактов главной страницы*/
@@ -1643,14 +1662,14 @@ footer .container {
   margin-bottom: 57px;
 }
 
-.shop-item:last-child {
+.shop-item__text {
   max-width: 641px;
   padding: 0;
   padding-bottom: 12px;
   padding-left: 21px;
 }
 
-.shop-item input {
+.shop-item__text input {
   min-width: 395px;
   height: 62px;
   font-size: 48px;

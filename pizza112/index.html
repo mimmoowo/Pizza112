@@ -70,25 +70,47 @@
       <section class="reviews">
         <h2 class="section-name">Отзывы</h2>
         <ul class="reviews-list">
-          <li class = "reviews-list__item"><a href="#"><img src="./img/left.svg" alt="Стрелочка влево"></a></li>
-          <li class = "reviews-list__item">
-            <ul class="review-list">
-              <li class="review-list__item"><img src="./img/avatar.png" alt="Аватар автора отзыва"></li>
-              <li class="review-list__item">
-                <p class="review-author">Василий Кружнин</p>
-                <div class="review-stars">
-                  <img src="./img/star.svg" class="star" data-value="1">
-                  <img src="./img/star.svg" class="star" data-value="2">
-                  <img src="./img/star.svg" class="star" data-value="3">
-                  <img src="./img/star.svg" class="star" data-value="4">
-                  <img src="./img/star.svg" class="star" data-value="5">
-                </div>
-                <p class="review-info">Посещение Pizza112 стало настоящим кулинарным открытием! Пицца здесь - наивкуснейшая в городе! Обслуживание на высшем 
-                  уровне - персонал дружелюбный и внимательный. Рекомендую всем любителям пиццы посетить Pizza112, чтобы погрузиться в удовольствие от отличной еды и атмосферы!</p>
-              </li>
-            </ul>
-          </li>
-          <li class = "reviews-list__item"><a href="#"><img src="./img/right.svg" alt="Стрелочка вправо"></a></li>
+          <style>
+            .star--empty {
+              display: none;
+            }
+
+            .reviews-display-container {
+              display: flex;
+              justify-content: flex-start;
+            }
+
+            .reviews-list__item:first-child {
+              flex: 1;
+            }
+
+            .reviews-list__item:last-child {
+              flex: 4;
+            }
+          </style>
+          <li class="reviews-list__item"><a href="#"><img src="./img/left.svg" alt="Стрелочка влево"></a></li>
+          <div id="reviews" class="" style="filter: blur(10px); width: 100%;">
+            <li class="reviews-list__item">
+              <ul class="review-list reviews-display-container">
+                <li class="review-list__item"><img src="./img/avatar.png" alt="Аватар автора отзыва"></li>
+                <li class="review-list__item">
+                  <p class="review-author">Василий Кружнин</p>
+                  <div class="review-stars">
+                    <img src="./img/star.svg" class="star" data-value="1">
+                    <img src="./img/star.svg" class="star" data-value="2">
+                    <img src="./img/star.svg" class="star" data-value="3">
+                    <img src="./img/star.svg" class="star" data-value="4">
+                    <img src="./img/star.svg" class="star" data-value="5">
+                  </div>
+                  <p class="review-info">Посещение Pizza112 стало настоящим кулинарным открытием! Пицца здесь -
+                    наивкуснейшая в городе! Обслуживание на высшем
+                    уровне - персонал дружелюбный и внимательный. Рекомендую всем любителям пиццы посетить Pizza112,
+                    чтобы погрузиться в удовольствие от отличной еды и атмосферы!</p>
+                </li>
+              </ul>
+            </li>
+          </div>
+          <li class="reviews-list__item"><a href="#"><img src="./img/right.svg" alt="Стрелочка вправо"></a></li>
         </ul>
       </section>
       <section class="contacts">
@@ -173,5 +195,6 @@
   </div> 
  
   <script src="./js/scriptRegistration.js"></script> 
+  <script src="./js/reviews.js"></script> 
 </body>
 </html>

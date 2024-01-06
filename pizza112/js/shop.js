@@ -9,7 +9,7 @@ let totalAmount = 0;
 const updateTotalCountAndAmount = (countChange, amountChange) => {
   try {
     totalCount += countChange;
-    totalAmount += amountChange * countChange; 
+    totalAmount += amountChange 
 
     if (resultCount && totalCount >= 0) {
       resultCount.innerHTML = `${totalCount} ${formatWord(
@@ -173,32 +173,32 @@ async function showBucket() {
       ev.preventDefault();
       count++;
       counterBlock.innerHTML = count;
-      updateTotalCountAndAmount(1, item.productVariantPrice);
+      updateTotalCountAndAmount(1, item.itemPrice);
       await addItem(item.productId, item.productVariant, 1); 
     };
     minus.onclick = async (ev) => {
       ev.preventDefault();
       if (count === 1) {
         ev.target.disabled = true;
-        updateTotalCountAndAmount(-1, item.productVariantPrice);
+        updateTotalCountAndAmount(-1, -item.itemPrice);
         await resetItem(item.productId, item.productVariant);
         listItem.remove();
         return;
       }
       count--;
       counterBlock.innerHTML = count;
-      updateTotalCountAndAmount(-1, item.productVariantPrice);
+      updateTotalCountAndAmount(-1, -item.itemPrice);
       await deleteItem(item.productId, item.productVariant);
     };
     deleteButton.onclick = async (ev) => {
       ev.preventDefault();
-      updateTotalCountAndAmount(-count, item.productVariantPrice * count);
+      updateTotalCountAndAmount(-count, -item.productVariantPrice);
       await resetItem(item.productId, item.productVariant);
       listItem.remove();
     };
 
     totalCount += item.quantity;
-    totalAmount += item.productVariantPrice * item.quantity;
+    totalAmount += item.productVariantPrice;
     } catch (error) {
       console.error(error)
     }
