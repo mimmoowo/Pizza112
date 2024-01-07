@@ -58,7 +58,7 @@ function main() {
                 }
 
                 try {
-                    const data = await response.json(); // если бы сервер в ответ хоть что-нибудь отвечал...
+                    const data = await response.json();
                     if (data.error) {
                         alert(data.error);
                     }

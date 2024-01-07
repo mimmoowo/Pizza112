@@ -1447,15 +1447,16 @@ footer .container {
 }
 
 .choseDrinks-content {
-  background: url(/img/choseDrinks2.png) no-repeat right 250px,
+  /*background: url(/img/choseDrinks2.png) no-repeat right 250px,
     url(/img/choseDrinks1.png) no-repeat right 200px,
-    url(/img/choseDrinks3.png) no-repeat 620px 200px;
+    url(/img/choseDrinks3.png) no-repeat 620px 200px;*/
   background-color: #e5e4d6;
   margin: 0 auto;
   padding: 20px;
   width: 1082px;
-  height: 700px;
+  height: 723px;
   border-radius: 60px;
+  overflow: hidden;
 }
 
 .closeChose-drinks {
@@ -1467,6 +1468,12 @@ footer .container {
   cursor: pointer;
 }
 
+.choseDrinks-content-content {
+  position: relative;
+  z-index: 2;
+  top: -600px;
+}
+
 .choseDrinks-content__name {
   margin: 0;
   margin-left: 53px;
@@ -1476,6 +1483,14 @@ footer .container {
   line-height: 83px;
   color: #bc6c25;
 }
+
+.drinks-background {
+  position: relative;
+  z-index: 1;
+  height: 600px;
+  left: 55%;
+  top: 25%;
+  }
 
 .choseDrinks-content__ingredient {
   font-size: 24px;
