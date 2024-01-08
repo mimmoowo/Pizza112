@@ -234,7 +234,7 @@ document
         //получаем блоки
         const modalBox = document.getElementById("choseDrinks-modal");
   
-        const bg = modalBox.getElementsByClassName("drink-background")[0];
+        const bg = modalBox.getElementsByClassName("drinks-background")[0];
   
         const name = modalBox.getElementsByClassName(
           "choseDrinks-content__name"
@@ -251,67 +251,66 @@ document
         info.innerHTML = metaInfo;
   
         bg.src = `https://pizza112.srvsrv.net/static/images/Products/${metaBg}`;
-        choseDrink.style.display = "block";
+        choseDrinks.style.display = "block";
   
         //настройка напитка
         const changer = new Changer();
-  
-        const variable = {
-          size: "M",
-          duff: "P",
+
+        const drink = {
+          size: "S",
+          flavor: "V",
         };
-  
-        const little = document.getElementById("little");
-        const medium = document.getElementById("medium");
-        const big = document.getElementById("big");
-        const traditional = document.getElementById("traditional");
-        const thin = document.getElementById("thin");
-  
-        little.onclick = (ev) => {
+
+        const small = document.getElementById("250");
+        const medium = document.getElementById("350");
+        const vanilla = document.getElementById("vanilla");
+        const chocolate = document.getElementById("chocolate");
+        const strawberry = document.getElementById("strawberry");
+
+        small.onclick = (ev) => {
           ev.preventDefault();
-          variable.size = "S";
+          drink.size = "S";
           changer.update();
         };
         medium.onclick = (ev) => {
           ev.preventDefault();
-          variable.size = "M";
+          drink.size = "M";
           changer.update();
         };
-        big.onclick = (ev) => {
+        vanilla.onclick = (ev) => {
           ev.preventDefault();
-          variable.size = "L";
+          drink.flavor = "V";
           changer.update();
         };
-        traditional.onclick = (ev) => {
+        chocolate.onclick = (ev) => {
           ev.preventDefault();
-          variable.duff = "P";
+          drink.flavor = "C";
           changer.update();
         };
-        thin.onclick = (ev) => {
+        strawberry.onclick = (ev) => {
           ev.preventDefault();
-          variable.duff = "TP";
+          drink.flavor = "S";
           changer.update();
         };
-  
+
         const updateInfo = () => {
-          const currVariableData = variables.find(
-            (el) => el.name === variable.size + variable.duff
+          const currDrinkData = drinks.find(
+            (el) => el.name === drink.size + drink.flavor
           );
-          console.log(currVariableData);
-          const duff =
-            variable.duff === "P" ? "традиционное тесто" : "тонкое тесто";
-          const size =
-            variable.size === "S"
-              ? "25см"
-              : variable.size === "M"
-              ? "30см"
-              : "35см";
-          total.innerHTML = `${size}, ${duff}, ${currVariableData.weight} г`;
+          console.log(currDrinkData);
+          const flavor =
+            drink.flavor === "V"
+              ? "ванильный"
+              : drink.flavor === "C"
+              ? "шоколадный"
+              : "клубничный";
+          const size = drink.size === "S" ? "маленький" : "средний";
+          total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
         };
         updateInfo();
-  
+
         changer.addEventListener("update", updateInfo);
-  
+
         //настраиваем счетчик
         const counter = new Changer();
   
@@ -356,7 +355,6 @@ document
   showEnd();
 
   //добавление в корзину
-
   const addBtn = modalBox.getElementsByClassName(
     "choseDrinks-content__end"
   )[0];
@@ -373,7 +371,7 @@ document
     const data = {
       productId: drinkId,
       quantity: count,
-      productVariant: variable.size + variable.duff,
+      productVariant: variable.size + variable.type,
     };
 
     const options = {

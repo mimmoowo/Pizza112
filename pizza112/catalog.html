@@ -133,22 +133,24 @@
 
   <div id="choseDrinks-modal" class="chose-drinks">
     <div class="choseDrinks-content">
-      <span class="closeChose-drinks"><img src="./img/close.svg" alt="Закрытие"></span>
+      <img class="drinks-background" src="./img/chosePizza.png">
+      <div class="choseDrinks-content-content">
+        <span class="closeChose-drinks"><img src="./img/close.svg" alt="Закрытие"></span>
       <h2 class="choseDrinks-content__name">Милкшейк</h2>
       <p class="choseDrinks-content__ingredient">250 мл, шоколадный</p>
       <div class="choseDrinks-ingredient">
         <span>описание</span>
-        <p class="chosePizza-ingredient__info">отправляемся в сладкое плавание в хорошей компании — главое не забудьте с собой милкшейк!</p>
+        <p class="choseDrinks-ingredient__info">отправляемся в сладкое плавание в хорошей компании — главое не забудьте с собой милкшейк!</p>
       </div>
       <div class="choseDrinks__parametrs">
         <div class="choseDrinks-content__size">
-          <a href="#" >ванильный</a>
-          <a href="#" >шоколадный</a>
-          <a href="#" >молочный</a>
+          <a href="#" id="vanilla" >ванильный</a>
+          <a href="#" id="chocolate">шоколадный</a>
+          <a href="#" id="strawberry">молочный</a>
         </div>
         <div class="choseDrinks-content__view">
-          <a href="">250 мл</a>
-          <a href="">350 мл</a>
+          <a href="#" id="250">250 мл</a>
+          <a href="#" id="350">350 мл</a>
         </div>
       </div>
       <div class="choseDrinks-content__counter">
@@ -156,7 +158,7 @@
         <p class="counter">1</p>
         <a href="#"><img src="./img/plus.svg" alt="Плюс"></a>
       </div>
-      <a href="" class="choseDrinks-content__end"><p>добавить в корзину за <span>250 ₽</span></p></a>
+      <a href="#" class="choseDrinks-content__end"><p>добавить в корзину за <span>250 ₽</span></p></a>
     </div>
   </div>
 
