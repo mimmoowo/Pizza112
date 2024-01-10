@@ -9,25 +9,49 @@ function fillFormWithData(data) {
   document.getElementById('avatar').src = "https://pizza112.srvsrv.net/static/images/Avatars/" + data.imageName;
 }
 
-function getAccountData() {
+document.getElementById('bot-button').addEventListener('click', function(event) {
+  event.preventDefault(); 
+  getAccountData(connectToTelegramBot);
+});
+
+function getAccountData(callback) {
   var url = 'https://pizza112.srvsrv.net/api/client/getPP';
-  
+
   fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('userToken')
-    },
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+      },
   })
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
-    fillFormWithData(data); 
+      console.log(data);
+      fillFormWithData(data);
+      callback(data.tgToken); 
   })
   .catch((error) => {
-    console.error('Error:', error);
+      console.error('Error:', error);
   });
 }
+
+
+function connectToTelegramBot(tgToken) {
+  if (tgToken) {
+      var telegramLink = 'https://t.me/Pizza112Bot?start=' + encodeURIComponent(tgToken);
+
+      console.log('Connecting to Telegram Bot:', telegramLink);
+      window.location.href = telegramLink;
+  } else {
+      console.error('Telegram Token not available.');
+  }
+}
+
+document.getElementById('bot-button').addEventListener('click', function(event) {
+  event.preventDefault();
+  var data = getAccountData(); 
+  window.location.href = 'https://t.me/Pizza112Bot?start=' + data.tgToken;
+});
 
 document.addEventListener('DOMContentLoaded', getAccountData);
 
@@ -65,6 +89,7 @@ function updateAccountData() {
   });
 }
 
+
 document.querySelector('.account-data__form').addEventListener('change', updateAccountData);
 
 var renameLinks = document.querySelectorAll('.account-data__rename');
@@ -80,6 +105,8 @@ for (var i = 0; i < renameLinks.length; i++) {
       
       inputField.disabled = false;
       
+      inputField.focus();
+      
       inputField.addEventListener('blur', function() {
         updateAccountData();
         
@@ -88,6 +115,21 @@ for (var i = 0; i < renameLinks.length; i++) {
     };
   })(inputField));
 }
+
+var inputFields = document.querySelectorAll('.account-data__form'); 
+
+for (var i = 0; i < inputFields.length; i++) {
+  var inputField = inputFields[i];
+
+  inputField.addEventListener('focus', function() {
+    this.style.outline = '2px solid #DCA15D'; 
+  });
+
+  inputField.addEventListener('blur', function() {
+    this.style.outline = ''; 
+  });
+}
+
 
 var dateSelects = document.querySelectorAll('.account-data__form.day, .account-data__form.mounth');
 
@@ -130,6 +172,7 @@ document.getElementById('uploadLink').addEventListener('click', function() {
   };
   input.click();
 });
+
 
 
 

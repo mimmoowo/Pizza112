@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             <p class="catalog-pizza__info">${item.productDescription}</p>
             <div class="catalog-pizza__bottom">
               <p class="catalog-pizza__price">от ${item.basePrice} ₽</p>
-              <a href="#" class="catalog-pizza__chose" data-id="${item.id}"
+              <button class="catalog-pizza__chose" data-id="${item.id}"
                 meta-name="${item.productName}"
                 meta-bg="${item.imageName}"
                 meta-info="${item.productDescription}"
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             <p class="catalog-drinks__info">${item.productDescription}</p>
             <div class="catalog-drinks__bottom">
               <p class="catalog-drinks__price">от ${item.basePrice} ₽</p>
-              <a href="#" class="catalog-drinks__chose" data-id="${item.id}"
+              <button class="catalog-drinks__chose" data-id="${item.id}"
                 meta-name="${item.productName}"
                 meta-bg="${item.imageName}"
                 meta-info="${item.productDescription}"

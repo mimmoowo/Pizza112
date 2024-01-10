@@ -377,8 +377,9 @@ li {
 }
 
 .container {
-  width: 1720px;
+  width:  100%;
   margin: 0 auto;
+  padding: 0 65px;
 }
 
 /*Верстка шапки*/
@@ -445,6 +446,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .news-list__item {
@@ -609,18 +611,15 @@ header {
 /*Верстка подвала*/
 
 footer {
-  position: relative;
-  bottom: 0;
-}
-footer .container {
   margin-top: 117px;
-  border-top: 4px #141414 solid;
-  padding-top: 21px;
 }
 
+
 .footer-list {
+  padding-top: 21px;
   display: flex;
   justify-content: space-between;
+  border-top: 4px #141414 solid;
 }
 
 .copyright {
@@ -628,6 +627,8 @@ footer .container {
   font-size: 18px;
   line-height: 24px;
 }
+
+
 
 .footer-list__item-name {
   font-size: 48px;
@@ -902,8 +903,16 @@ footer .container {
 /*Вертка личного кабинета(данные)*/
 
 .account-info {
+  box-sizing: content-box;
+  max-width: 1713px;
   padding: 0 77px;
+  margin: 0 auto;
   margin-bottom: 147px;
+}
+
+.bot-telegram{
+  vertical-align: middle;
+  height: 64px;
 }
 
 .account-info__list {
@@ -977,6 +986,10 @@ footer .container {
   padding: 15px 43px;
 }
 
+.account-data__form:active {
+  border: 1px solid #bc6c25;
+}
+
 .account-data__rename {
   position: absolute;
   right: 30px;
@@ -1004,6 +1017,8 @@ footer .container {
   line-height: 57px;
   color: #273617;
 }
+
+
 
 /*Верстка личного кабинета(Истоиря заказов)*/
 
@@ -1125,6 +1140,9 @@ footer .container {
 /*Вертка личного кабинета(Оставить отзыв)*/
 .feedback {
   padding: 0 77px;
+  box-sizing: content-box;
+  max-width: 1713px;
+  margin: 0 auto;
 }
 
 .section-feedback__name {
@@ -1193,7 +1211,7 @@ footer .container {
 
 .catalog-info img {
   position: absolute;
-  right: -50px;
+  right: -60px;
   top: 0;
 }
 
@@ -1227,6 +1245,16 @@ footer .container {
 .catalog-pizza__item:first-child {
   padding: 0;
 }
+
+.catalog-pizza__item button {
+  display: block;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
 
 .catalog-pizza__item:last-child {
   padding: 0;
@@ -1275,8 +1303,31 @@ footer .container {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
-  text-decoration: none;
   color: #bc6c25;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+}
+
+.catalog-pizza__chose:hover{
+  color: #DCA15D;
+}
+
+.catalog-pizza__chose::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #BC6C25;
+  transition: width .3s;
+}
+
+.catalog-pizza__chose:active::after{
+  width: 100%;
 }
 
 /*Верстка подробной информации о продукте(Пицца)*/
@@ -1289,7 +1340,7 @@ footer .container {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  padding: 10% 0;
+  padding: 5% 0;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -1446,7 +1497,7 @@ footer .container {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  padding: 10% 0;
+  padding: 5% 0;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -1601,10 +1652,19 @@ footer .container {
 .catalog-drinks__item {
   padding: 37px 53px 8px;
   margin-right: 39px;
+  max-width: 540px;
 }
 
 .catalog-drinks__item:first-child {
   padding: 0;
+}
+
+.catalog-drinks__item button {
+  display: block;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .catalog-drinks__item:last-child {
@@ -1650,12 +1710,38 @@ footer .container {
 }
 
 .catalog-drinks__chose {
+  display: block;
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
-  text-decoration: none;
   color: #bc6c25;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
 }
+
+.catalog-drinks__chose:hover{
+  color: #DCA15D;
+}
+
+.catalog-drinks__chose::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #BC6C25;
+  transition: width .3s;
+}
+
+.catalog-drinks__chose:active::after{
+  width: 100%;
+}
+
+
 
 /*Верстка корзины заказа*/
 
