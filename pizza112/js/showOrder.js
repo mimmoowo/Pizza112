@@ -23,14 +23,95 @@ async function showOrderDetails(id) {
 
   data.forEach(item => {
     try {
-      const size =
-        item.productVariant[0] === 'S'
-          ? '25см'
-          : item.productVariant[0] === 'M'
-          ? '30см'
-          : '35см';
-      const duff =
-        item.productVariant[1] === 'P' ? 'традиционное тесто' : 'тонкое тесто';
+      let duff,size;
+      if(item.productId == 8){
+        if(item.productVariant == "SMV"){
+          size = "250 мл, ванильный";
+           duff ="маленький";
+        }else if(item.productVariant == "SMS"){
+          size = "250 мл, клубничный";
+           duff ="маленький";
+        }else if(item.productVariant == "SMC"){
+          size = "250 мл, шоколадный";
+           duff ="маленький";
+        }else if(item.productVariant == "MMV"){
+          size = "350 мл, ванильный";
+          duff ="средний";
+        }else if(item.productVariant == "MMC"){
+          size = "350 мл, шоколадный";
+          duff ="средний";
+        }
+        else if(item.productVariant == "MMS"){
+          size = "350 мл, клубничный";
+           duff ="средний";
+        }
+      }else if(item.productId == 9){
+        if(item.productVariant == "SJC"){
+          size = "500 мл, вишневый";
+           duff ="маленький";
+        }else if(item.productVariant == "SJO"){
+          size = "500 мл, апельсиновый";
+           duff ="маленький";
+        }else if(item.productVariant == "SJA"){
+          size = "250 мл, яблочный";
+           duff ="маленький";
+        }else if(item.productVariant == "MJC"){
+          size = "1000 мл, вишневый";
+          duff ="средний";
+        }else if(item.productVariant == "MJO"){
+          size = "1000 мл, апельсиновый";
+          duff ="средний";
+        }
+        else if(item.productVariant == "MJA"){
+          size = "1000 мл, яблочный";
+           duff ="средний";
+        }
+      }else if(item.productId == 10){
+        if(item.productVariant == "MD"){
+          size = "400 мл";
+           duff ="средний";
+        }else if(item.productVariant == "SD"){
+          size = "200 мл";
+           duff ="маленький";
+        }
+      }else if(item.productId == 11){
+        if(item.productVariant == "LD"){
+          size = "400 мл";
+           duff ="большой";
+        }else if(item.productVariant == "MD"){
+          size = "300 мл";
+           duff ="средний";
+        }
+      }else if(item.productId == 12){
+        if(item.productVariant == "SD"){
+          size = "200 мл";
+           duff ="маленький";
+        }else if(item.productVariant == "MD"){
+          size = "300 мл";
+           duff ="средний";
+        }
+      }else if(item.productId == 13){
+        if(item.productVariant == "SD"){
+          size = "150 мл";
+           duff ="маленький";
+        }else if(item.productVariant == "MD"){
+          size = "300 мл";
+           duff ="средний";
+        }
+      }else{
+
+        size =
+      item.productVariant[0] === "S"
+        ? "25см"
+        : item.productVariant[0] === "M"
+          ? "30см"
+          : "35см";
+     duff =
+      item.productVariant[1] === "P" ? "традиционное тесто" : "тонкое тесто";
+
+
+
+      }
 
       const listItem = document.createElement('li');
       listItem.className = 'shop-item';

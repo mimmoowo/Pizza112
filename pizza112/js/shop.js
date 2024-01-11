@@ -128,7 +128,7 @@ async function showBucket() {
     try {
       // Расшифровываем значения info
 
-let duff;
+let duff,size;
       if(item.productId == 8){
         if(item.productVariant == "SMV"){
           size = "250 мл, ванильный";
@@ -205,7 +205,7 @@ let duff;
         }
       }else{
 
-        const size =
+        size =
       item.productVariant[0] === "S"
         ? "25см"
         : item.productVariant[0] === "M"
@@ -213,7 +213,10 @@ let duff;
           : "35см";
      duff =
       item.productVariant[1] === "P" ? "традиционное тесто" : "тонкое тесто";
-    }
+
+
+
+      }
 
 
     // Создаем элемент списка для каждого товара
@@ -297,7 +300,7 @@ let duff;
   if (paymentsResult && totalAmount > 0) {
     paymentsResult.innerHTML =
       new Intl.NumberFormat("ru-RU").format(totalAmount) + " ₽";
-  }
+  } 
   
   //Оплата товара 
   const resultSubmit = document.querySelector('.submitOrder');

@@ -14,9 +14,11 @@ function main() {
             <img src="./img/star.svg" class="star" data-value="4">
             <img src="./img/star.svg" class="star" data-value="5">
             </div>
-            <textarea rows="10" cols="45" name="text" class="feedback-form"
-            placeholder="Напишите ваши впечатления от пребывания у нас"></textarea>
-            <a type="button" id="submitFeedback">отправить</a>
+            <div class="feedback-container">
+              <textarea rows="10" cols="45" name="text" class="feedback-form"
+              placeholder="Напишите ваши впечатления от пребывания у нас"></textarea>
+              <a type="button" id="submitFeedback">отправить</a>
+            </div>
         `;
 
 
