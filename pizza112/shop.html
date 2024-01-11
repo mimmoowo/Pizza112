@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <title>Pizza112</title>
   <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.cdnfonts.com/css/kreadon" rel="stylesheet">
@@ -25,8 +25,6 @@
       <div class="shop-basket">
         <h2 class="shop-name">Корзина заказа</h2>
         <ul class="shop-list">
-          
-          
             
         </ul>
       </div>
@@ -34,7 +32,7 @@
         <div class="shop-result">
           <p class="result-count">0 товаров</p>
           <div class="payments">
-            <h2>Итого к оплате</h2>
+            <h2>Иготого к оплате</h2>
             <p class="payments-result">0 ₽</p>
           </div>
             <a href="#" class="result-submit">перейти к оплате<img src="./img/arrow.svg" alt="Стрелочка"></a>
@@ -68,6 +66,61 @@
       </ul>
     </div>
   </footer>
+
+  <div id="paymentOrder-modal" class="paymentOrder">
+    <div class="paymentOrder-content">
+      <div class="payment-info">
+        <h2>Оформление заказа</h2>
+        <button class="closePayment"><img src="./img/close.svg" alt="Закрытие"></button>
+      </div>
+      <div class="payment-parametr">
+        <div class="payment-paramert__content">
+          <div class="payment-type">
+            <h3>Тип доставки</h3>
+            <div class="payment-delivery">
+              <input type="radio" id="delivery" name="deliveryType" value="delivery">
+              <label for="delivery">Доставка</label>
+              <input type="radio" id="pickup" name="deliveryType" value="pickup">
+              <label for="pickup">Самовывоз</label><br>
+            </div>
+            <div id="address" style="display: none;" class="payment-address">
+              <label for="street">Адрес:</label><br>
+              <input type="text" id="street" name="street" placeholder="Малышева 5"><br>
+            </div>
+          </div>
+          <div class="payment-method">
+            <h3>Оплата</h3>
+            <input type="radio" id="cash" name="paymentMethod" value="cash">
+            <label for="cash">Наличными</label>
+            <input type="radio" id="card" name="paymentMethod" value="card">
+            <label for="card">Картой</label><br>
+          </div>
+        </div>
+        <div class="order-details">
+          <h3>Детали заказа</h3>
+          <ul class="order-detalis__list">
+            
+          </ul>
+        </div>
+        <div class="order-total">
+            <div class="order-total__delivery">
+              <p>Доставка</p>
+              <p>Бесплатно</p>
+            </div>
+            <div class="order-total__quantity">
+              <p class="order-total_count">2 товара</p>
+              <p class="order-total_price">1000 ₽</p>
+            </div> 
+            <div class="order-total__price">
+              <p>Сумма заказа</p>
+              <p class="order-total_price">1000 ₽</p>
+            </div>
+        </div>
+        <button class="submitOrder">Оформить заказ</button>
+      </div>
+    </div>
+  </div>
+  <script src="./js/payment.js"></script> 
   <script src="./js/hota.js"></script> 
   <script src="./js/shop.js"></script>
 </body>

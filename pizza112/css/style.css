@@ -3,10 +3,6 @@
 /* Document
    ========================================================================== */
 body
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- */
 
 html {
   line-height: 1.15; /* 1 */
@@ -387,6 +383,10 @@ header {
   margin-bottom: 98px;
 }
 
+.header-logo{
+
+}
+
 .header-nav {
   display: flex;
   justify-content: space-between;
@@ -397,20 +397,23 @@ header {
 .header-list {
   display: flex;
   align-items: center;
+  justify-content: space-between; 
 }
 
 .header-list__item {
-  line-height: 62px;
+  line-height: 40px;
   font-size: 48px;
   color: #141414;
   font-weight: 600;
   align-items: center;
-  margin-right: 61px;
+  flex: 1;
+  margin-right: 20px;
 }
 
 .header-list__item a {
   text-decoration: none;
   color: #141414;
+  display: block; 
 }
 
 .header-list__item a:hover {
@@ -446,7 +449,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 .news-list__item {
@@ -489,16 +491,18 @@ header {
 }
 
 .info img {
+  display: block;
   position: absolute;
-  right: -50px;
-  top: 0;
+  right: -65px;
+  top: 50px;
+  max-width: 600px;
 }
 
 .info p {
   font-weight: 400;
   font-size: 40px;
-  line-height: 52px;
-  max-width: 60%;
+  line-height: 40px;
+  max-width: 65%;
 }
 
 /*Верстка отзывов главной страницы*/
@@ -543,6 +547,13 @@ header {
 
 .review-list__item {
   margin-right: 55px;
+}
+
+.review-list__item:first-child img{
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  border: 2px solid black;
 }
 
 .review-list__item:last-child {
@@ -614,7 +625,6 @@ footer {
   margin-top: 117px;
 }
 
-
 .footer-list {
   padding-top: 21px;
   display: flex;
@@ -627,8 +637,6 @@ footer {
   font-size: 18px;
   line-height: 24px;
 }
-
-
 
 .footer-list__item-name {
   font-size: 48px;
@@ -1018,8 +1026,6 @@ footer {
   color: #273617;
 }
 
-
-
 /*Верстка личного кабинета(Истоиря заказов)*/
 
 .section--order-hist {
@@ -1192,16 +1198,16 @@ footer {
   margin-bottom: 210px;
 }
 
-.catalog-info__name {
+.catalog-info__name{
   font-weight: 600;
-  font-size: 98px;
+  font-size: 85px;
   line-height: 125px;
   color: #bc6c25;
   margin: 0;
   margin-bottom: 30px;
 }
 
-.catalog-info p {
+.catalog-info p{
   font-size: 48px;
   font-weight: 400;
   line-height: 62px;
@@ -1212,7 +1218,8 @@ footer {
 .catalog-info img {
   position: absolute;
   right: -60px;
-  top: 0;
+  top: 10%;
+  max-width: 45%;
 }
 
 /*Верстка выбора пиццы(каталог)*/
@@ -1221,7 +1228,7 @@ footer {
   font-weight: 600;
   line-height: 83px;
   margin: 0;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   padding-left: 87px;
 }
 
@@ -1236,14 +1243,14 @@ footer {
 }
 
 .catalog-pizza__item {
-  padding: 37px 53px 8px;
-  margin-right: 39px;
-  max-width: 510px;
-  height: auto;
+  padding: 37px;
+  max-width: 400px;
+  height: 600px;
 }
 
 .catalog-pizza__item:first-child {
   padding: 0;
+  height: auto;
 }
 
 .catalog-pizza__item button {
@@ -1254,16 +1261,16 @@ footer {
   text-decoration: none;
 }
 
-
-
 .catalog-pizza__item:last-child {
   padding: 0;
   margin-right: 0;
+  height: auto;
 }
 
 .catalog-pizza__img {
   margin-bottom: 17px;
-  width: 400px;
+  max-width: 400px;
+  max-height: 400px;
   height: auto;
 }
 
@@ -1303,6 +1310,7 @@ footer {
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
+  text-decoration: none;
   color: #bc6c25;
   border: 0;
   background: none;
@@ -1447,10 +1455,18 @@ footer {
   text-decoration: none;
 }
 
+.chosePizza-content__size a:active {
+  color: #bc6c25;
+}
+
 .chosePizza-content__view {
   display: flex;
   justify-content: space-around;
   margin-bottom: 40px;
+}
+
+.chosePizza-content__view a:active {
+  color: #bc6c25;
 }
 
 .chosePizza-content__view a {
@@ -1601,6 +1617,10 @@ footer {
   text-decoration: none;
 }
 
+.choseDrinks-content__size a:active {
+  color: #bc6c25;
+}
+
 .choseDrinks-content__view {
   display: flex;
   justify-content: space-around;
@@ -1614,6 +1634,11 @@ footer {
   color: #141414;
   text-decoration: none;
 }
+
+.choseDrinks-content__view a:active {
+  color: #bc6c25;
+}
+
 
 .choseDrinks-content__counter {
   display: flex;
@@ -1650,13 +1675,14 @@ footer {
 }
 
 .catalog-drinks__item {
-  padding: 37px 53px 8px;
-  margin-right: 39px;
-  max-width: 540px;
+  padding: 37px;
+  max-width: 400px;
+  height: 600px;
 }
 
 .catalog-drinks__item:first-child {
   padding: 0;
+  height: auto;
 }
 
 .catalog-drinks__item button {
@@ -1670,12 +1696,12 @@ footer {
 .catalog-drinks__item:last-child {
   padding: 0;
   margin-right: 0;
+  height: auto;
 }
 
 .catalog-drinks__img {
   margin-bottom: 17px;
-  width: 400px;
-  height: 400px;
+  max-width: 400px;
 }
 
 .catalog-drinks__name {
@@ -1710,10 +1736,10 @@ footer {
 }
 
 .catalog-drinks__chose {
-  display: block;
   font-size: 28px;
   font-weight: 400;
   line-height: 36px;
+  text-decoration: none;
   color: #bc6c25;
   border: 0;
   background: none;
@@ -1740,9 +1766,6 @@ footer {
 .catalog-drinks__chose:active::after{
   width: 100%;
 }
-
-
-
 /*Верстка корзины заказа*/
 
 .shop-basket {
@@ -1837,6 +1860,54 @@ footer {
   font-weight: 330;
   line-height: 62px;
   color: #273617;
+}
+
+.orders-result{
+  margin-bottom: 30px;
+}
+
+.adressOrder{
+  display: flex;
+  align-items: center;
+}
+
+.paymentsOrder{
+  display: flex;
+  align-items: center;
+}
+
+.adressOrder h3{
+  margin: 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 62px;
+  color: #273617;
+}
+
+.paymentsOrder h3{
+  margin: 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 62px;
+  color: #273617;
+}
+
+.adressOrder p{
+  margin: 0;
+  font-size: 48px;
+  font-weight: 330;
+  line-height: 62px;
+  color: #273617;
+  margin-left: 30px;
+}
+
+.paymentsOrder p{
+  margin: 0;
+  font-size: 48px;
+  font-weight: 330;
+  line-height: 62px;
+  color: #273617;
+  margin-left: 30px;
 }
 
 /*Верстка итоговой оплаты (каталог)*/
@@ -2049,5 +2120,171 @@ footer {
   border: 0;
   background: none;
 
+  cursor: pointer;
+}
+
+
+/*Модальное окно оплаты товара*/
+.paymentOrder {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  padding: 10% 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.paymentOrder-content {
+  background-color: #e5e4d6;
+  margin: 0 auto;
+  padding: 40px;
+  width: 756px;
+  height: 800px;
+  border-radius: 60px;
+}
+
+.payment-info{
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.payment-info h2{
+  padding: 0;
+  margin: 0;
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 83px;
+  color: #bc6c25;
+}
+
+.closePayment{
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  border: none;
+}
+
+.payment-paramert__content{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.paymentOrder-content h3{
+  padding: 0;
+  margin: 0;
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 35px;
+  color: #bc6c25;
+  margin-bottom: 10px;
+}
+
+.paymentOrder-content label{
+  font-size: 15px;
+  font-weight: 500;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  padding: 10px;
+  display: inline-block;
+  border: 1px solid #bc6c25;
+  border-radius: 10%;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #bc6c25;
+  color: white;
+}
+
+.payment-address label{
+  font-size: 20px;
+}
+
+.payment-address input{
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fffdee;
+}
+
+.order-detalis__list {
+  max-height: calc(7 * 50px); 
+  overflow-y: auto;
+}
+
+.order-detalis__item{
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-detalis__item-block{
+  display: flex;
+  column-gap: 10px;
+}
+
+.order-details p{
+  margin: 0;
+  font-size: 20px;  
+}
+
+.order-total p{
+  margin: 0;
+}
+
+.order-total__delivery{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-total__delivery p{
+  font-size: 20px;  
+  font-weight: 600;
+}
+
+.order-total__quantity{
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.order-total__price{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-total__price p {
+  font-size: 20px;  
+  font-weight: 600;
+}
+
+.submitOrder{
+  background-color: #bc6c25;
+  color: white;
+  border: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
   cursor: pointer;
 }

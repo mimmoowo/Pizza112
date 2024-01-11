@@ -127,14 +127,94 @@ async function showBucket() {
   data.forEach((item) => {
     try {
       // Расшифровываем значения info
-      const size =
+
+let duff;
+      if(item.productId == 8){
+        if(item.productVariant == "SMV"){
+          size = "250 мл, ванильный";
+           duff ="маленький";
+        }else if(item.productVariant == "SMS"){
+          size = "250 мл, клубничный";
+           duff ="маленький";
+        }else if(item.productVariant == "SMC"){
+          size = "250 мл, шоколадный";
+           duff ="маленький";
+        }else if(item.productVariant == "MMV"){
+          size = "350 мл, ванильный";
+          duff ="средний";
+        }else if(item.productVariant == "MMC"){
+          size = "350 мл, шоколадный";
+          duff ="средний";
+        }
+        else if(item.productVariant == "MMS"){
+          size = "350 мл, клубничный";
+           duff ="средний";
+        }
+      }else if(item.productId == 9){
+        if(item.productVariant == "SJC"){
+          size = "500 мл, вишневый";
+           duff ="маленький";
+        }else if(item.productVariant == "SJO"){
+          size = "500 мл, апельсиновый";
+           duff ="маленький";
+        }else if(item.productVariant == "SJA"){
+          size = "250 мл, яблочный";
+           duff ="маленький";
+        }else if(item.productVariant == "MJC"){
+          size = "1000 мл, вишневый";
+          duff ="средний";
+        }else if(item.productVariant == "MJO"){
+          size = "1000 мл, апельсиновый";
+          duff ="средний";
+        }
+        else if(item.productVariant == "MJA"){
+          size = "1000 мл, яблочный";
+           duff ="средний";
+        }
+      }else if(item.productId == 10){
+        if(item.productVariant == "MD"){
+          size = "400 мл";
+           duff ="средний";
+        }else if(item.productVariant == "SD"){
+          size = "200 мл";
+           duff ="маленький";
+        }
+      }else if(item.productId == 11){
+        if(item.productVariant == "LD"){
+          size = "400 мл";
+           duff ="большой";
+        }else if(item.productVariant == "MD"){
+          size = "300 мл";
+           duff ="средний";
+        }
+      }else if(item.productId == 12){
+        if(item.productVariant == "SD"){
+          size = "200 мл";
+           duff ="маленький";
+        }else if(item.productVariant == "MD"){
+          size = "300 мл";
+           duff ="средний";
+        }
+      }else if(item.productId == 13){
+        if(item.productVariant == "SD"){
+          size = "150 мл";
+           duff ="маленький";
+        }else if(item.productVariant == "MD"){
+          size = "300 мл";
+           duff ="средний";
+        }
+      }else{
+
+        const size =
       item.productVariant[0] === "S"
         ? "25см"
         : item.productVariant[0] === "M"
           ? "30см"
           : "35см";
-    const duff =
+     duff =
       item.productVariant[1] === "P" ? "традиционное тесто" : "тонкое тесто";
+    }
+
 
     // Создаем элемент списка для каждого товара
     const listItem = document.createElement("li");
@@ -220,11 +300,19 @@ async function showBucket() {
   }
   
   //Оплата товара 
-  const resultSubmit = document.querySelector('.result-submit');
-
+  const resultSubmit = document.querySelector('.submitOrder');
 
   resultSubmit.addEventListener('click', async (event) => {
   event.preventDefault();
+
+  const payType = document.querySelector('input[name="paymentMethod"]:checked').value;
+  const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+  console.log(payType);
+  console.log(deliveryType);
+  let address = null;
+  if (deliveryType !== 'pickup') {
+    address = document.querySelector('#street').value;
+  }
 
   const url = 'https://pizza112.srvsrv.net/api/bucket/confirm';
   const options = {
@@ -233,16 +321,22 @@ async function showBucket() {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + token,
     },
+    body: JSON.stringify({
+      address,
+      payType,
+    }),    
   };
 
   const response = await fetch(url, options);
 
   if (response.ok) {
     alert('Заказ успешно оплачен!');
+    location.reload();
   } else {
     alert('Произошла ошибка при оплате заказа');
   }
 });
+
 }
 
 const formatWord = (count, one, two, five) => {

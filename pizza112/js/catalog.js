@@ -94,7 +94,6 @@ function getPizzaVariants(pizzaId) {
   return fetch(url, options)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((error) => console.error("Ошибка:", error));
@@ -145,7 +144,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             <p class="catalog-drinks__info">${item.productDescription}</p>
             <div class="catalog-drinks__bottom">
               <p class="catalog-drinks__price">от ${item.basePrice} ₽</p>
-              <button class="catalog-drinks__chose" data-id="${item.id}"
+              <button" class="catalog-drinks__chose" data-id="${item.id}"
                 meta-name="${item.productName}"
                 meta-bg="${item.imageName}"
                 meta-info="${item.productDescription}"

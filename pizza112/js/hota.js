@@ -66,7 +66,7 @@ window.onload = function() {
     .then((userData) => {
       var liUser = document.createElement('li');
       liUser.className = 'header-list__item';
-      liUser.innerHTML = '<a href="account.html">Личный кабинет</a>';
+      liUser.innerHTML = '<a href="account.html">Кабинет</a>';
       
       ul.insertBefore(liUser, liCart.nextSibling);
     });

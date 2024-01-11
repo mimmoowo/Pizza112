@@ -51,7 +51,6 @@ document
       const pizzaId = event.target.getAttribute("data-id"); // Получаем ID пиццы из атрибута data-id
 
       const variables = await getPizzaVariants(pizzaId);
-
       //получаем мета данные
       const metaBg = event.target.getAttribute("meta-bg");
       const metaName = event.target.getAttribute("meta-name");
@@ -122,7 +121,6 @@ document
         const currVariableData = variables.find(
           (el) => el.name === variable.size + variable.duff
         );
-        console.log(currVariableData);
         const duff =
           variable.duff === "P" ? "традиционное тесто" : "тонкое тесто";
         const size =
@@ -224,9 +222,9 @@ document
     .addEventListener("click", async function (event) {
       if (event.target.className === "catalog-drinks__chose") {
         const drinkId = event.target.getAttribute("data-id"); // Получаем ID напитка из атрибута data-id
-  
-        const variables = await getDrinkVariants(drinkId);
-  
+        const drinks = await getDrinkVariants(drinkId);
+
+
         //получаем мета данные
         const metaBg = event.target.getAttribute("meta-bg");
         const metaName = event.target.getAttribute("meta-name");
@@ -256,56 +254,171 @@ document
         //настройка напитка
         const changer = new Changer();
 
-        const drink = {
-          size: "S",
-          flavor: "V",
-        };
 
-        const small = document.getElementById("250");
-        const medium = document.getElementById("350");
-        const vanilla = document.getElementById("vanilla");
-        const chocolate = document.getElementById("chocolate");
-        const strawberry = document.getElementById("strawberry");
 
-        small.onclick = (ev) => {
-          ev.preventDefault();
-          drink.size = "S";
-          changer.update();
-        };
-        medium.onclick = (ev) => {
-          ev.preventDefault();
-          drink.size = "M";
-          changer.update();
-        };
-        vanilla.onclick = (ev) => {
-          ev.preventDefault();
-          drink.flavor = "V";
-          changer.update();
-        };
-        chocolate.onclick = (ev) => {
-          ev.preventDefault();
-          drink.flavor = "C";
-          changer.update();
-        };
-        strawberry.onclick = (ev) => {
-          ev.preventDefault();
-          drink.flavor = "S";
-          changer.update();
-        };
 
-        const updateInfo = () => {
+        const small = document.getElementById("25");
+        const medium = document.getElementById("35");
+          let drink = {
+            size: "S",
+            flavor: "MV",
+          };
+
+        if(drinkId == 11){
+          document.getElementById("25").innerText = "средний";
+          document.getElementById("35").innerText = "большой";
+                small.onclick = (ev) => {
+                  ev.preventDefault();
+                  drink.size = "M";
+                  changer.update();
+                };
+                medium.onclick = (ev) => {
+                  ev.preventDefault();
+                  drink.size = "L";
+                  changer.update();
+                };
+
+
+        }else{
+          document.getElementById("25").innerText = "маленький";
+          document.getElementById("35").innerText = "средний";
+
+                small.onclick = (ev) => {
+                  ev.preventDefault();
+                  drink.size = "S";
+                  changer.update();
+                };
+                medium.onclick = (ev) => {
+                  ev.preventDefault();
+                  drink.size = "M";
+                  changer.update();
+                };
+        }
+
+        if(drinkId == 8){
+          document.getElementById("drink_btns")
+          .innerHTML = '<a href="#" id="vanilla" >ванильный</a><a href="#" id="chocolate">шоколадный</a><a href="#" id="strawberry">молочный</a>'
+
+          const vanilla = document.getElementById("vanilla");
+          const chocolate = document.getElementById("chocolate");
+          const strawberry = document.getElementById("strawberry");
+
+
+          vanilla.onclick = (ev) => {
+            ev.preventDefault();
+            drink.flavor = "MV";
+            changer.update();
+          };
+          chocolate.onclick = (ev) => {
+            ev.preventDefault();
+            drink.flavor = "MC";
+            changer.update();
+          };
+          strawberry.onclick = (ev) => {
+            ev.preventDefault();
+            drink.flavor = "MS";
+            changer.update();
+          };
+        }else if(drinkId == 9){
+           document.getElementById("drink_btns")
+          .innerHTML = '<a href="#" id="yabloko" >яблочный</a><a href="#" id="apelsin">апельсиновый</a><a href="#" id="vishnya">вишневый</a>'
+
+          const yabloko = document.getElementById("yabloko");
+          const apelsin = document.getElementById("apelsin");
+          const vishnya = document.getElementById("vishnya");
+           drink = {
+            size: "S",
+            flavor: "JA",
+          };
+
+          yabloko.onclick = (ev) => {
+            ev.preventDefault();
+            drink.flavor = "JA";
+            changer.update();
+          };
+          apelsin.onclick = (ev) => {
+            ev.preventDefault();
+            drink.flavor = "JO";
+            changer.update();
+          };
+          vishnya.onclick = (ev) => {
+            ev.preventDefault();
+            drink.flavor = "JC";
+            changer.update();
+          };
+
+        }else if(drinkId == 10){
+          document.getElementById("drink_btns").innerHTML = ''
+          drink = {
+            size: "S",
+            flavor: "D",
+          };
+
+        }else if(drinkId == 11){
+          document.getElementById("drink_btns").innerHTML = ''
+          drink = {
+            size: "M",
+            flavor: "D",
+          };
+
+        }else if(drinkId == 12 || drinkId == 13){
+          document.getElementById("drink_btns").innerHTML = ''
+          drink = {
+            size: "S",
+            flavor: "D",
+          };
+
+        }
+        
+         const updateInfo = () => {
           const currDrinkData = drinks.find(
             (el) => el.name === drink.size + drink.flavor
           );
-          console.log(currDrinkData);
-          const flavor =
-            drink.flavor === "V"
+          if (drinkId == 8) {
+                      const flavor =
+            drink.flavor === "MV"
               ? "ванильный"
-              : drink.flavor === "C"
+              : drink.flavor === "MC"
               ? "шоколадный"
-              : "клубничный";
+              : 
+              "клубничный"; 
           const size = drink.size === "S" ? "маленький" : "средний";
           total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
+
+          }else if (drinkId == 9) {
+              const flavor =
+              drink.flavor === "JA"
+                ? "яблочный"
+                : drink.flavor === "JO"
+                ? "апельсиновый"
+                : 
+                "вишневый"; 
+            const size = drink.size === "S" ? "маленький" : "средний";
+            total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
+            
+          }else if (drinkId == 10) {
+              const flavor ="Капучино"; 
+            const size = drink.size === "S" ? "маленький" : "средний";
+            total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
+            
+          }else if (drinkId == 11) {
+              const flavor ="Латте"; 
+            const size = drink.size === "S" ? "средний" : "большой";
+            total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
+            
+          }else if (drinkId == 12) {
+              const flavor ="Американо"; 
+            const size = drink.size === "S" ? "маленький" : "средний";
+            total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
+            
+          }else if (drinkId == 13) {
+              const flavor ="Какао"; 
+            const size = drink.size === "S" ? "маленький" : "средний";
+            total.innerHTML = `${flavor}, ${size}, ${currDrinkData.portionInMilliliters} мл`;
+            
+          }
+          
+
         };
         updateInfo();
 
@@ -344,10 +457,10 @@ document
   .getElementsByTagName("span")[0];
 
   const showEnd = () => {
-    const currVariableData = variables.find(
-      (el) => el.name === variable.size + variable.duff
+    const currDrinkData = drinks.find(
+      (el) => el.name === drink.size + drink.flavor
     );
-    const sum = count * currVariableData.price;
+    const sum = count * currDrinkData.price;
     end.innerHTML = sum + " ₽";
   };
   counter.addEventListener("update", showEnd);
@@ -367,11 +480,10 @@ document
     if (!token) return alert("Требуется авторизация");
 
     const url = "https://pizza112.srvsrv.net/api/bucket/add";
-
     const data = {
       productId: drinkId,
       quantity: count,
-      productVariant: variable.size + variable.type,
+      productVariant: drink.size + drink.flavor,
     };
 
     const options = {
@@ -384,7 +496,7 @@ document
     };  
     await fetch(url, options);
     alert("Товар добавлен");
-    choseDrink.style.display = "none";
+    choseDrinks.style.display = "none";
   };
   }
 });

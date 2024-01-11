@@ -19,6 +19,8 @@ async function showOrderDetails(id) {
   const response = await fetch(url, options);
   const data = await response.json();
 
+  let totalAmount = 0; 
+
   data.forEach(item => {
     try {
       const size =
@@ -48,10 +50,18 @@ async function showOrderDetails(id) {
       `;
 
       document.querySelector('.shop-list').appendChild(listItem);
+
+      totalAmount += item.productVariantPrice; 
+
+      
+      document.querySelector('.adressOrder-result').innerHTML = item.address ? item.address : "Самовывоз";
+      document.querySelector('.paymentsOrder-result').innerHTML = item.payType === 'card' ? "Картой" : "Наличный расчет";
     } catch (error) {
       console.error('Error:', error);
     }
   });
+
+  document.querySelector('.payments-result').innerHTML = new Intl.NumberFormat("ru-RU").format(totalAmount) + " ₽"; 
 }
 
 showOrderDetails(orderId);
